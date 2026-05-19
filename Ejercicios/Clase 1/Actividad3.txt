@@ -1,0 +1,24 @@
+Protocolo (scheme):
+https
+Subdominio:
+api
+Dominio:
+github.com
+Puerto:
+443
+Ruta (path):
+/repos/bryancs/isw521/issues
+Parámetros de consulta (query parameters):
+state=open
+labels=semana1
+Fragmento o ancla:
+#comentarios
+
+Parte B — Clean URLs
+1. Página del curso ISW-521, cuatrimestre 2026-II, sede San Carlos
+https://utn.ac.cr/cursos/isw-521/2026-2/san-carlos
+2. Perfil del estudiante con carné 2022-0001
+https://utn.ac.cr/estudiantes/2022-0001
+3. Lista de materiales de la semana 3 del curso ISW-521
+https://utn.ac.cr/cursos/isw-521/materiales/semana-3
+

@@ -1,0 +1,11 @@
+A sitio para vecinos-internet
+sistema interno de gestion de planillas-Intranet
+Portal donde las empresas constructoras revisan permisos-Extranet
+
+2. ¿Cuál de los tres sistemas requiere más inversión en seguridad? ¿Por qué?
+la extranet combina la dificultdad de ambos mundos
+
+3¿Podría un mismo servidor físico alojar los tres sistemas de forma segura? ¿Cómo conceptualmente?
+Sí, es totalmente posible.
+
+¿Cómo lograrlo?: Mediante la virtualización de servidores utilizando un hipervisor tipo 1 (como VMware ESXi o ProXMOX) o contenedores aislados (como Docker/Kubernetes).

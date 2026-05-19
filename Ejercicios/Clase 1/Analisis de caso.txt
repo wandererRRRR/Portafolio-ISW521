@@ -1,0 +1,6 @@
+1. ¿Es correcto lo que dijo el Rector? ¿Por qué la distinción del director de TI es técnicamente importante?
+es correcto de forma coloquial pero de forma mas especifica internes es la infraestructura de redes conectadas y web es el servicio que funciona sobre internet usando tecnologias como httpp y navegadores
+2. Si usan HTTP sobre Internet pero solo para usuarios internos de la UTN, ¿están usando Internet o la WWW, o ambos?
+utilizan ambos debido a que se usa la internet como metodo de comunicacion aunque sea privada sigue siendo una aplicion web solo no una www publica
+3. ¿Qué organismo (W3C o IETF) define los estándares más relevantes para este sistema de notas? Justifica.
+IETF debido a que esta es la encargada de la funcionalidad de  la pagina mientras w3c es mas par aspectos del usuario

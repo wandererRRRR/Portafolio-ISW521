@@ -1,0 +1,58 @@
+Desglose de cada URL:
+https://campus.utn.ac.cr
+
+TLD: .cr (ccTLD - Country Code) y cuenta con un TLD secundario de segundo nivel jerárquico .ac (destinado a la academia).
+
+SLD: utn
+
+Subdominio: campus
+
+https://www.netflix.com
+
+TLD: .com (gTLD - Generic)
+
+SLD: netflix
+
+Subdominio: www
+
+https://api.github.io
+
+TLD: .io (ccTLD de derecho, aunque técnicamente ICANN lo trata a menudo como genérico por su uso comercial, administrativamente pertenece al Territorio Británico del Océano Índico).
+
+SLD: github
+
+Subdominio: api
+
+https://app.maravilla.co.cr
+
+TLD: .cr (ccTLD) combinado con el dominio de segundo nivel .co (comercial).
+
+SLD: maravilla
+
+Subdominio: app
+
+Clasificación de Dominios de Nivel Superior:
+ccTLDs (Country Code TLDs): .cr (Costa Rica), .io (Territorio Británico del Océano Índico).
+
+gTLDs (Generic TLDs): .com
+
+
+2. Administración de TLDs y rol de ICANN
+¿Quién administra el TLD .cr?
+La administración del ccTLD .cr está delegada a NIC Costa Rica, una unidad de la Academia Nacional de Ciencias de Costa Rica.
+
+¿Quién administra el TLD .com?
+Es operado y administrado por la empresa estadounidense Verisign, bajo la supervisión e規lación de la ICANN.
+
+¿Necesitás a ICANN para registrar un subdominio?
+No. ICANN coordina la raíz del Internet y la asignación de los TLDs primarios a los operadores de registros (registries). Una vez que un dominio (SLD) ya está comprado o delegado a una entidad o persona, esa entidad tiene control absoluto sobre su propia zona DNS y puede crear los subdominios que quiera de forma interna sin interactuar con ICANN ni pagar extra.
+
+3. Creación de egresados.utn.ac.cr
+¿Necesita la UTN pagar a un registrador?
+No, no lo necesita.
+
+¿Por qué?
+Porque la UTN ya es dueña y tiene la autoridad sobre la zona DNS del dominio utn.ac.cr. Crear egresados simplemente requiere que el administrador de TI de la universidad agregue un nuevo registro (como un registro A o CNAME) en su propio servidor de nombres (Name Server). Es un proceso puramente interno y gratuito.
+
+
+Registro A (Address): Apunta un nombre de dominio directamente a una dirección IPv4 (ej. utn.ac.cr $\rightarrow$ 192.0.2.1). Es la forma más rápida en la que el navegador encuentra el servidor físico.Registro CNAME (Canonical Name): Apunta un nombre de dominio a otro nombre de dominio en lugar de a una IP (ej. campus.utn.ac.cr $\rightarrow$ ghs.googlehosted.com). Funciona como un alias; si la IP del dominio de destino cambia, el CNAME se actualiza automáticamente.
