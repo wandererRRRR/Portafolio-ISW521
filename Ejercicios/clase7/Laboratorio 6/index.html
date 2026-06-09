@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Monitoreo Hídrico</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">💧 AcueductosIoT</div>
+        <ul class="nav-links">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Sensores</a></li>
+            <li><a href="#">Alertas</a></li>
+            <li><a href="#">Reportes</a></li>
+        </ul>
+        <button class="btn-logout">Cerrar Sesión</button>
+    </nav>
+
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li>📊 Resumen</li>
+                    <li>💧 Tanques</li>
+                    <li>⚡ Presiones</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section class="sensor-grid">
+                <div class="sensor-card">
+                    <h3>Nivel de Tanque</h3>
+                    <p class="sensor-value">73%</p>
+                </div>
+            </section>
+        </main>
+
+        <aside class="alert-panel">
+            <h3>🔔 Alertas Activas</h3>
+            <div class="alert">⚠️ Presión baja — Sector B</div>
+        </aside>
+    </div>
+
+</body>
+</html>

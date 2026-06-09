@@ -1,0 +1,47 @@
+/* Ejercicio 1: Barra de Navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* [Añade aquí tu explicación de por qué usa esto] */
+    align-items: center;
+    min-height: 60px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+}
+
+/* Ejercicio 2: Grid de Sensores */
+.sensor-grid {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente fila [cite: 41, 55] */
+    gap: 16px;
+}
+
+.sensor-card {
+    flex-basis: calc(33.333% - 16px); /* Calcula el ancho proporcional [cite: 55] */
+}
+
+/* Ejercicio 3: Layout Principal */
+.dashboard-layout {
+    display: flex;
+    flex-direction: row;
+    min-height: calc(100vh - 60px);
+}
+
+.sidebar { flex: 1; }
+.main-content { flex: 3; }
+.alert-panel { flex: 1; }
+
+/* Ejercicio 4: Responsive (Añadir al final) */
+@media (max-width: 768px) {
+    .dashboard-layout {
+        flex-direction: column; /* Cambia a columna en móviles [cite: 96] */
+    }
+    
+    .sidebar, .alert-panel {
+        width: 100%;
+        flex: none;
+    }
+}
