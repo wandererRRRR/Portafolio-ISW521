@@ -3,71 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Monitoreo Hídrico</title>
+    <title>Dashboard de Monitoreo Hídrico v2.4.1</title>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; }
+        /* Estilos Globales - Paleta de colores oscuros moderna */
+        :root {
+            --bg-body: #0a0e17;
+            --bg-panels: #111827;
+            --bg-cards: #1f2937;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-green: #10b981;
+            --accent-yellow: #fbbf24;
+            --accent-blue: #3b82f6;
+            --border-color: #374151;
+            --sidebar-width: 250px;
+            --alert-panel-width: 300px;
+        }
 
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: var(--bg-body); color: var(--text-primary); font-size: 14px; }
+
+        /* Barra de Navegación */
         .navbar {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 20px; background: #2c3e50; color: white; min-height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+            background: var(--bg-panels);
+            border-bottom: 1px solid var(--border-color);
+            min-height: 64px;
+            position: sticky; top: 0; z-index: 100;
         }
 
-        .dashboard-layout { display: flex; min-height: calc(100vh - 60px); }
-
-        /* Sidebar con Flexbox para empujar la firma al fondo */
-        .sidebar { 
-            flex: 1; background: #34495e; color: white; padding: 20px;
-            display: flex; flex-direction: column; justify-content: space-between; 
-        }
-
-        .main-content { flex: 3; padding: 20px; }
+        .nav-logo { font-size: 1.25rem; font-weight: bold; color: var(--accent-green); display: flex; align-items: center; gap: 8px; }
         
-        /* Estilo de la marca de programador */
-        .dev-signature {
-            font-size: 0.8rem;
-            color: #95a5a6;
-            border-top: 1px solid #4a6278;
-            padding-top: 10px;
-            text-align: center;
-        }
-        .dev-signature span { display: block; color: #3498db; font-weight: bold; }
+        .nav-links { display: flex; list-style: none; gap: 24px; }
+        .nav-links a { color: var(--text-primary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--accent-blue); }
 
-        .sensor-grid { display: flex; gap: 16px; }
-        .sensor-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .btn-logout { 
+            background-color: transparent; border: 1px solid var(--border-color); color: var(--text-secondary); 
+            padding: 8px 16px; border-radius: 6px; cursor: pointer; transition: all 0.2s; 
+        }
+        .btn-logout:hover { background-color: rgba(255,255,255,0.05); color: var(--text-primary); border-color: var(--text-primary); }
+
+        /* Layout Principal */
+        .dashboard-layout {
+            display: flex;
+            min-height: calc(100vh - 64px);
+        }
+
+        /* Barra Lateral */
+        .sidebar { 
+            width: var(--sidebar-width); background: var(--bg-panels); padding: 24px 16px; 
+            border-right: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; 
+        }
+        .sidebar h4 { color: var(--text-secondary); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; margin-bottom: 16px; }
+        
+        .sidebar-nav ul { list-style: none; }
+        .sidebar-nav li { margin-bottom: 8px; }
+        .sidebar-nav a { 
+            display: flex; align-items: center; gap: 12px; color: var(--text-secondary); 
+            text-decoration: none; padding: 10px 12px; border-radius: 8px; transition: all 0.2s; 
+        }
+        .sidebar-nav a:hover { color: var(--text-primary); background-color: rgba(255,255,255,0.05); }
+        .sidebar-nav a.active { color: var(--accent-green); background-color: rgba(16, 185, 129, 0.1); font-weight: 500; }
+
+        /* Contenido Principal */
+        .main-content { 
+            flex: 1; padding: 24px; background-color: var(--bg-body); 
+            overflow-y: auto; display: flex; flex-direction: column; 
+        }
+        
+        .section-header { 
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; 
+        }
+        .live-indicator { 
+            color: var(--accent-green); font-size: 0.8rem; font-weight: bold; border: 1px solid var(--accent-green); 
+            padding: 4px 8px; border-radius: 4px; display: flex; align-items: center; gap: 6px; 
+        }
+        .live-indicator span { width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; display: inline-block; animation: pulse 1.5s infinite; }
+
+        /* Grid de Tarjetas de Sensor */
+        .sensor-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .sensor-card {
+            background: var(--bg-cards);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            flex: 1 1 calc(33.333% - 16px);
+            display: flex; flex-direction: column; gap: 8px; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .sensor-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); border-color: var(--accent-blue); }
+
+        .sensor-header { font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
+        .sensor-value { font-size: 2rem; font-weight: bold; color: var(--accent-green); }
+        .sensor-subtext { font-size: 0.85rem; color: var(--text-secondary); margin-top: auto; }
+        .alert-value { color: var(--accent-yellow); }
+
+        /* Panel de Gráficos (Placeholder) */
+        .chart-section {
+            background: var(--bg-cards);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            min-height: 200px;
+            display: flex; justify-content: center; align-items: center; color: var(--text-secondary); font-style: italic;
+        }
+
+        /* Panel de Alertas */
+        .alert-panel { 
+            width: var(--alert-panel-width); background: var(--bg-panels); padding: 24px 16px; 
+            border-left: 1px solid var(--border-color); display: flex; flex-direction: column; 
+        }
+        .alert-panel h3 { margin-bottom: 16px; display: flex; align-items: center; gap: 8px; font-size: 1rem; }
+        .alert-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        
+        .alert-card {
+            background: var(--bg-cards);
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            display: flex; flex-direction: column; gap: 4px;
+        }
+        .alert-card.warning { border-color: rgba(251, 191, 36, 0.3); }
+        .alert-card.critical { border-color: rgba(239, 68, 68, 0.3); }
+        .alert-card.info { border-color: rgba(59, 130, 246, 0.3); }
+
+        .alert-title { color: var(--text-primary); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+        .alert-msg { color: var(--text-secondary); font-size: 0.85rem; }
+        .alert-time { font-size: 0.8rem; color: #6b7280; text-align: right; margin-top: 4px; }
+        .alert-card.warning .alert-title { color: var(--accent-yellow); }
+        .alert-card.critical .alert-title { color: #ef4444; }
+
+        /* Animaciones */
+        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dashboard-layout { flex-direction: column; }
+            .sidebar, .alert-panel { width: 100%; border: none; border-bottom: 1px solid var(--border-color); }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Ocultar enlaces de navegación en móvil */
+            .sensor-card { flex-basis: 100%; } /* Tarjetas de sensor ocupan todo el ancho */
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="nav-logo">💧 AcueductosIoT</div>
-        <button>Cerrar Sesión</button>
+        <ul class="nav-links">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Sensores</a></li>
+            <li><a href="#">Alertas</a></li>
+            <li><a href="#">Reportes</a></li>
+        </ul>
+        <button class="btn-logout">Cerrar Sesión</button>
     </nav>
 
     <div class="dashboard-layout">
         <aside class="sidebar">
-            <nav>
-                <ul style="list-style: none; padding: 0;">
-                    <li>📊 Resumen</li>
-                    <li>💧 Tanques</li>
-                    <li>⚡ Presiones</li>
+            <nav class="sidebar-nav">
+                <h4>Menú</h4>
+                <ul>
+                    <li><a href="#" class="active">📊 Resumen</a></li>
+                    <li><a href="#">💧 Tanques</a></li>
+                    <li><a href="#">⚡ Presiones</a></li>
+                    <li><a href="#">🔬 Calidad</a></li>
+                    <li><a href="#">⚙️ Configuración</a></li>
                 </ul>
             </nav>
-
-            <div class="dev-signature">
-                <span>AquaTech Systems</span>
-                Diseñado por David
-            </div>
         </aside>
 
         <main class="main-content">
-            <h1>Panel de Control</h1>
+            <div class="section-header">
+                <h1>Panel de Monitoreo Hídrico</h1>
+                <div class="live-indicator"><span></span> EN VIVO</div>
+            </div>
+            
             <section class="sensor-grid">
                 <div class="sensor-card">
-                    <h3>Nivel de Tanque</h3>
-                    <p>73%</p>
+                    <div class="sensor-header">💧 Nivel Tanque Principal</div>
+                    <p class="sensor-value">73<span style="font-size: 1.5rem;">%</span></p>
+                    <p class="sensor-subtext">Actualizado: hace 2 min</p>
+                </div>
+                <div class="sensor-card">
+                    <div class="sensor-header">⚡ Presión Red Calle 2</div>
+                    <p class="sensor-value alert-value">28 <span style="font-size: 1.5rem;">PSI</span></p>
+                    <p class="sensor-subtext">⚠️ Bajo el umbral: 30 PSI</p>
+                </div>
+                <div class="sensor-card">
+                    <div class="sensor-header">🔬 Cloro Residual</div>
+                    <p class="sensor-value">0.4 <span style="font-size: 1.5rem;">mg/L</span></p>
+                    <p class="sensor-subtext">Rango normal: 0.3 - 0.5 mg/L</p>
                 </div>
             </section>
+
+            <section class="chart-section">
+                <span>[ Área para gráficos de tendencias - Placeholder ]</span>
+            </section>
         </main>
+
+        <aside class="alert-panel">
+            <h3>🔔 Alertas Activas</h3>
+            <ul class="alert-list">
+                <li class="alert-card warning">
+                    <div class="alert-title">⚠️ Presión Baja - Sector B</div>
+                    <p class="alert-msg">Umbral de 30 PSI no alcanzado en Calle 2.</p>
+                    <p class="alert-time">hace 3 minutos</p>
+                </li>
+                <li class="alert-card info">
+                    <div class="alert-title">Cloro en Rango Normal</div>
+                    <p class="alert-msg">Nivel óptimo de 0.4 mg/L en punto de muestreo.</p>
+                    <p class="alert-time">hace 15 minutos</p>
+                </li>
+                <li class="alert-card critical">
+                    <div class="alert-title">Suministro Principal OK</div>
+                    <p class="alert-msg">Nivel del tanque principal al 73%. Sin riesgo de desabasto.</p>
+                    <p class="alert-time">hace 19 minutos</p>
+                </li>
+            </ul>
+        </aside>
     </div>
 
 </body>

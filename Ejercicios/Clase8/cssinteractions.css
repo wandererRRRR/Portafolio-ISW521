@@ -1,0 +1,17 @@
+.vehicle-display { display: grid; }
+.angle {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Radio Button Hack para ángulos */
+#angle-front:checked ~ .showroom-grid .angle.front,
+#angle-side:checked ~ .showroom-grid .angle.side,
+#angle-rear:checked ~ .showroom-grid .angle.rear {
+    opacity: 1;
+}
+
+/* Cambio de color */
+#color-rojo:checked ~ .showroom-grid { --car-color: var(--car-color-rojo); }
+.vehicle-body { background-color: var(--car-color); transition: background-color 0.3s ease; }

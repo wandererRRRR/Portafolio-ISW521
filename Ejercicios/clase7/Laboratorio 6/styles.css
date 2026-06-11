@@ -1,47 +1,50 @@
-/* Ejercicio 1: Barra de Navegación */
+/* Estilos Globales */
+body { font-family: sans-serif; margin: 0; background-color: #f4f7f6; }
+
+/* Barra de Navegación */
 .navbar {
     display: flex;
-    justify-content: space-between; /* [Añade aquí tu explicación de por qué usa esto] */
+    justify-content: space-between; /* Distribuye el espacio sobrante entre los elementos, enviando el logo a la izquierda y los botones a la derecha */
     align-items: center;
+    padding: 0 20px;
+    background: #2c3e50;
+    color: white;
     min-height: 60px;
 }
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 24px;
-}
+.nav-links { display: flex; list-style: none; gap: 24px; }
+.nav-links a { color: white; text-decoration: none; }
 
-/* Ejercicio 2: Grid de Sensores */
-.sensor-grid {
-    display: flex;
-    flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente fila [cite: 41, 55] */
-    gap: 16px;
-}
-
-.sensor-card {
-    flex-basis: calc(33.333% - 16px); /* Calcula el ancho proporcional [cite: 55] */
-}
-
-/* Ejercicio 3: Layout Principal */
+/* Layout Principal */
 .dashboard-layout {
     display: flex;
     flex-direction: row;
     min-height: calc(100vh - 60px);
 }
 
-.sidebar { flex: 1; }
-.main-content { flex: 3; }
-.alert-panel { flex: 1; }
+.sidebar { flex: 1; background: #34495e; color: white; padding: 20px; }
+.main-content { flex: 3; padding: 20px; }
+.alert-panel { flex: 1; background: #ecf0f1; padding: 20px; border-left: 1px solid #ccc; }
 
-/* Ejercicio 4: Responsive (Añadir al final) */
+/* Grid de Sensores */
+.sensor-grid {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente fila */
+    gap: 16px;
+}
+
+.sensor-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex-basis: calc(33.333% - 16px); /* Calcula el ancho proporcional para 3 columnas */
+}
+
+/* Responsive */
 @media (max-width: 768px) {
     .dashboard-layout {
-        flex-direction: column; /* Cambia a columna en móviles [cite: 96] */
+        flex-direction: column; /* Cambia a columna en móviles para mejor lectura */
     }
-    
-    .sidebar, .alert-panel {
-        width: 100%;
-        flex: none;
-    }
+    .sensor-card { flex-basis: 100%; } /* En móvil, cada tarjeta ocupa el 100% */
 }

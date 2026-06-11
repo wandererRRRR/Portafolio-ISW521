@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/palette.css">
+    <link rel="stylesheet" href="css/interactions.css">
+    <title>Showroom - Auto Style CR</title>
+</head>
+<body>
+    <input type="radio" name="angle" id="angle-front" checked hidden>
+    <input type="radio" name="angle" id="angle-side" hidden>
+    <input type="radio" name="angle" id="angle-rear" hidden>
+
+    <main class="showroom-grid">
+        <section class="sidebar-selector">
+            <h1>MARCA</h1>
+            </section>
+
+        <section class="vehicle-display">
+            <img class="angle front" src="assets/img/corolla-gr-front.jpg" alt="Frente">
+            <img class="angle side" src="assets/img/corolla-gr-side.jpg" alt="Perfil">
+            <img class="angle rear" src="assets/img/corolla-gr-rear.jpg" alt="Atrás">
+        </section>
+
+        <aside class="cotizacion">
+            <h2>COTIZACIÓN</h2>
+        </aside>
+
+        <footer class="paleta-pintura">
+            <label class="paint-swatch" id="color-rojo">
+                <input type="radio" name="car-color" checked>
+            </label>
+            </footer>
+    </main>
+</body>
+</html>

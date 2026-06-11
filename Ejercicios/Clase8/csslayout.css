@@ -1,0 +1,11 @@
+.showroom-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr 280px; /* Asimétrico */
+    grid-template-rows: auto 120px;
+    grid-template-areas: 
+        'selector vehicle quote'
+        'palette palette palette';
+    gap: 12px;
+    min-height: 100vh;
+}
+.paleta-pintura { grid-column: 1 / -1; }
